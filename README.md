@@ -139,7 +139,8 @@ Idempotency-Key: unique-key
 
 ```json
 {
-  "message": "Charged 100 GHS"
+  "message": "Charged 100 GHS",
+  "status" : 200
 }
 ```
 
