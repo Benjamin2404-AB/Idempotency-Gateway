@@ -1,75 +1,3 @@
-Good — this is where your project goes from “working API” to “submission that stands out.”
-
-I’ll give you a **clean architecture + a ready-to-paste README** you can directly use or tweak.
-
----
-
-# 🧱 1. Architecture (what you should include)
-
-You want a **simple flow diagram + explanation**.
-
-## 📌 System Architecture (text version)
-
-```
-Client
-  │
-  │  POST /process-payment (Idempotency-Key)
-  ▼
-FastAPI Router (API Layer)
-  │
-  │  1. Validate request
-  │  2. Extract Idempotency-Key
-  ▼
-Concurrency Control Layer
-  │
-  │  Per-key Lock (in_flight_locks)
-  │  → prevents race conditions
-  ▼
-Idempotency Layer
-  │
-  ├── Key exists?
-  │      ├── Yes → compare payload
-  │      │         ├── same → return cached response
-  │      │         └── different → 422 error
-  │      └── No → continue processing
-  ▼
-Payment Service Layer
-  │
-  │  Simulates external payment gateway (2s delay)
-  ▼
-Transaction Store (in-memory dict)
-  │
-  │  Saves:
-  │   - payment
-  │   - response
-  │   - timestamp
-  │   - status
-  ▼
-Response returned to client
-```
-
----
-
-## 📌 Audit Endpoint Flow
-
-```
-Client → GET /transactions/{key}
-            │
-            ▼
-      Transaction Store
-            │
-            ▼
-   Returns audit record
-```
-
----
-
-# 🧾 2. FULL README (copy this)
-
-You can paste this directly into your repository.
-
----
-
 # 💳 Idempotency Layer for Payment Processing API
 
 ## 📌 Overview
@@ -188,7 +116,8 @@ Idempotency-Key: unique-key
 
 ```json
 {
-  "message": "Charged 100 GHS"
+  "message": "Charged 100 GHS",
+  "status" : 200
 }
 ```
 
@@ -242,7 +171,8 @@ Returns stored transaction for auditing.
   "status": "completed",
   "timestamp": "2026-06-20T10:30:00Z",
   "response": {
-    "message": "Charged 100 GHS"
+    "message": "Charged 100 GHS",
+    "status" : 200
   }
 }
 ```
@@ -271,7 +201,7 @@ Used `sleep(2)` to mimic external payment gateway latency.
 
 # 💡 Developer Choice Feature
 
-## 📊 Transaction Audit API
+##  Transaction Audit API
 
 An additional endpoint was added:
 
@@ -288,7 +218,7 @@ GET /transactions/{key}
 
 ---
 
-# ⚠️ Limitations
+#  Limitations
 
 * Uses in-memory storage (not persistent)
 * Not distributed-safe (locks are per-process only)
