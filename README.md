@@ -1,3 +1,15 @@
+---
+
+#  Architecture Diagram
+<img width="438" height="425" alt="image" src="https://github.com/user-attachments/assets/a87da986-d2d9-442f-8280-df044daf7d00" />
+
+
+---
+
+
+
+
+
 # 💳 Idempotency Layer for Payment Processing API
 
 ## 📌 Overview
@@ -216,15 +228,7 @@ GET /transactions/{key}
 * Provides transparency for financial operations
 * Turns system into a lightweight ledger
 
----
 
-#  Limitations
-
-* Uses in-memory storage (not persistent)
-* Not distributed-safe (locks are per-process only)
-* No TTL for idempotency keys
-
----
 
 
 
