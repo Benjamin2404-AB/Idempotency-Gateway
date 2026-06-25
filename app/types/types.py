@@ -16,7 +16,6 @@ class PaymentRequest(BaseModel):
     Args:
         amount (_int_):  _this refers to the payment amount_
         currency (_string_) : _this is the currency in which the payment is being carried out_
-        BaseModel (_type_): _attributes are amount and currency_
     """
     amount : int
     currency : str
