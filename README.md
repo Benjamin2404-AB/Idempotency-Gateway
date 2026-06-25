@@ -10,9 +10,9 @@
 
 
 
-# 💳 Idempotency Layer for Payment Processing API
+# Idempotency Layer for Payment Processing API
 
-## 📌 Overview
+##  Overview
 
 This project implements a **payment processing API with an idempotency layer** to prevent duplicate transactions caused by network retries.
 
@@ -20,7 +20,7 @@ It ensures that each payment request is processed **exactly once**, even if the 
 
 ---
 
-# 🚨 Problem Statement
+#  Problem Statement
 
 Payment systems often face a critical issue:
 
@@ -35,7 +35,7 @@ This system solves that by introducing:
 
 ---
 
-# 🏗️ Architecture
+# Architecture
 
 The system is built using a layered architecture:
 
@@ -72,21 +72,21 @@ Exposes transaction history via query endpoint.
 
 ---
 
-# 🔐 Key Features
+# Key Features
 
-## ✅ Idempotency Protection
+## Idempotency Protection
 
 Prevents duplicate payment processing using `Idempotency-Key`.
 
-## ✅ Race Condition Safety
+## Race Condition Safety
 
 Uses **thread locks per key** to ensure atomic execution.
 
-## ✅ Payload Integrity Check
+## Payload Integrity Check
 
 Rejects requests with same key but different payload.
 
-## ✅ Transaction Audit Trail
+## Transaction Audit Trail
 
 Stores full transaction history with:
 
@@ -95,17 +95,17 @@ Stores full transaction history with:
 * response
 * payment details
 
-## ✅ Cache Hit Optimization
+## Cache Hit Optimization
 
 Returns cached response instantly for duplicate requests.
 
 ---
 
-# 📡 API Endpoints
+# API Endpoints
 
 ---
 
-## 🔹 POST /process-payment
+## POST /process-payment
 
 ### Headers
 
@@ -168,7 +168,7 @@ Status:
 
 ---
 
-## 🔹 GET /transactions/{key}
+## GET /transactions/{key}
 
 ### Description
 
@@ -192,7 +192,7 @@ Returns stored transaction for auditing.
 
 ---
 
-# 🧠 Design Decisions
+#  Design Decisions
 
 ## 1. In-Memory Store
 
@@ -233,7 +233,7 @@ GET /transactions/{key}
 
 
 
-# 🧪 How to Run
+# How to Run
 
 ```bash
 pip install -r requirements.txt
@@ -242,7 +242,7 @@ uvicorn app.main:app --reload
 
 ---
 
-# 🧠 Summary
+#  Summary
 
 This system guarantees:
 
